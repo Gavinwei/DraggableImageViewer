@@ -50,7 +50,13 @@ class ImageListSampleActivity : AppCompatActivity() {
     }
 
     private fun showImages(index: Int) {
-        ImageViewerHelper.showImages(this, listOf(mImagesIv1, mImagesIv2, mImagesIv3), imags, index)
+        ImageViewerHelper.showImages(
+            this,
+            listOf(mImagesIv1, mImagesIv2, mImagesIv3),
+            imags,
+            index,
+            titleName = "测试标题"
+        )
     }
 
     private fun loadImage(url: String, iv: ImageView) {

@@ -79,7 +79,8 @@ object ImageViewerHelper {
         views: List<View>?,
         imgInfos: List<ImageInfo>,
         index: Int = 0,
-        showDownLoadBtn: Boolean = true
+        showDownLoadBtn: Boolean = true,
+        titleName: String? = null
     ) {
         if (imgInfos.isEmpty()) return
         //多张图片开启复杂的方式显示
@@ -107,16 +108,16 @@ object ImageViewerHelper {
                 )
             }
         }
-        ImagesViewerActivity.start(context, draggableImageInfos, index)
+        ImagesViewerActivity.start(context, draggableImageInfos, index,titleName)
     }
 
-    fun showImagesWithSingleView(
+    private fun showImagesWithSingleView(
         context: Context,
         view: View?,
         imgInfos: List<ImageInfo>,
         picIndex: Int = 0,
         showDownLoadBtn: Boolean = true
-    ){
+    ) {
         if (imgInfos.isEmpty()) return
         //多张图片开启复杂的方式显示
         val draggableImageInfos = ArrayList<DraggableImageInfo>()
@@ -143,7 +144,7 @@ object ImageViewerHelper {
                 )
             }
         }
-        ImagesViewerActivity.start(context, draggableImageInfos, picIndex)
+        ImagesViewerActivity.start(context, draggableImageInfos, picIndex,null)
     }
 
     /**
@@ -177,7 +178,12 @@ object ImageViewerHelper {
                 showDownLoadBtn
             )
         } else {
-            draggableInfo = DraggableImageInfo(originUrl, thumbUrl, imageSize = imgSize,imageCanDown = showDownLoadBtn)
+            draggableInfo = DraggableImageInfo(
+                originUrl,
+                thumbUrl,
+                imageSize = imgSize,
+                imageCanDown = showDownLoadBtn
+            )
         }
 
         draggableInfo.adjustImageUrl()

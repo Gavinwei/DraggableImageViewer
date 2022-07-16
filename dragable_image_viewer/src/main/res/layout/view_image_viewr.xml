@@ -1,46 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-       xmlns:tools="http://schemas.android.com/tools"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:background="#000000"
-       tools:parentTag="FrameLayout">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:parentTag="FrameLayout">
 
     <com.draggable.library.extension.view.HackyViewPager
-            android:id="@+id/mImageViewerViewPage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+        android:id="@+id/mImageViewerViewPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    <TextView
-            android:id="@+id/mImageViewerTvIndicator"
-            android:gravity="center"
-            android:text="1/2"
-            android:textColor="#ffffff"
-            android:layout_marginTop="40dp"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"/>
 
     <ProgressBar
-            android:id="@+id/mImageViewerProgress"
-            android:visibility="gone"
-            android:layout_gravity="center"
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
+        android:id="@+id/mImageViewerProgress"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
 
     <RelativeLayout
-            android:layout_margin="18dp"
-            android:layout_gravity="bottom"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="70dp"
+        android:layout_gravity="bottom">
 
 
         <ImageView
-                android:id="@+id/mImageGalleryViewOriginDownloadImg"
-                android:src="@drawable/icon_down_image"
-                android:layout_alignParentRight="true"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+            android:id="@+id/mImageGalleryViewOriginDownloadImg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/mImageViewerTvIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="1/2"
+            android:textColor="#ffffff" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="18dp"
+            android:layout_toStartOf="@+id/mImageViewerTvIndicator"
+            android:src="@drawable/ic_arrow_forward" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="18dp"
+            android:layout_toEndOf="@+id/mImageViewerTvIndicator"
+            android:src="@drawable/ic_arrow_back" />
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="160dp"
+        tools:text="名称"
+        android:textColor="#ffffffff"
+        android:textSize="20sp" />
 
 </merge>

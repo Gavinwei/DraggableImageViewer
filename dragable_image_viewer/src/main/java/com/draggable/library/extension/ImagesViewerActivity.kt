@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.appcompat.app.AppCompatActivity
 import android.view.ViewGroup
 import com.draggable.library.extension.entities.DraggableImageInfo
@@ -15,10 +16,17 @@ class ImagesViewerActivity : AppCompatActivity() {
     companion object {
         private const val PARAMS = "draggableImages"
         private const val INDEX = "index"
-        fun start(context: Context, draggableImages: ArrayList<DraggableImageInfo>, index: Int = 0) {
+        private const val TITLE = "title"
+        fun start(
+            context: Context,
+            draggableImages: ArrayList<DraggableImageInfo>,
+            index: Int = 0,
+            title: String?
+        ) {
             val intent = Intent(context, ImagesViewerActivity::class.java)
             intent.putExtra(PARAMS, draggableImages)
             intent.putExtra(INDEX, index)
+            intent.putExtra(TITLE, title)
             context.startActivity(intent)
             if (context is Activity) {
                 context.overridePendingTransition(0, 0)
@@ -29,13 +37,20 @@ class ImagesViewerActivity : AppCompatActivity() {
     private val galleryViewer by lazy {
         DraggableImageGalleryViewer(this).apply {
             layoutParams =
-                ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
             actionListener = object : DraggableImageGalleryViewer.ActionListener {
                 override fun closeViewer() {
                     finish()
                     overridePendingTransition(0, 0)
                 }
             }
+            (intent.getStringExtra(TITLE))?.let {
+                setTitleString(it)
+            }
+
         }
     }
 

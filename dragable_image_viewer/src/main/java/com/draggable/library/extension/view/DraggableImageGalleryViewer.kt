@@ -7,6 +7,7 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import android.view.*
 import android.widget.FrameLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.draggable.library.core.DraggableImageView
 import com.draggable.library.extension.entities.DraggableImageInfo
@@ -54,7 +55,10 @@ class DraggableImageGalleryViewer(context: Context) : FrameLayout(context) {
             override fun instantiateItem(container: ViewGroup, position: Int): DraggableImageView {
                 val imageInfo = mImageList[position]
                 val imageView = getImageViewFromCacheContainer()
-                container.addView(imageView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
+                container.addView(
+                    imageView,
+                    LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+                )
                 if (showWithAnimator) {
                     showWithAnimator = false
                     imageView.showImageWithAnimator(imageInfo)
@@ -62,7 +66,8 @@ class DraggableImageGalleryViewer(context: Context) : FrameLayout(context) {
                     imageView.showImage(imageInfo)
                 }
                 imageView.setTag("$TAG_PREGIX$position")
-                mImageGalleryViewOriginDownloadImg.visibility = if (imageInfo.imageCanDown) View.VISIBLE else View.GONE
+                mImageGalleryViewOriginDownloadImg.visibility =
+                    if (imageInfo.imageCanDown) View.VISIBLE else View.GONE
                 return imageView
             }
 
@@ -71,12 +76,17 @@ class DraggableImageGalleryViewer(context: Context) : FrameLayout(context) {
             }
         }
 
-        mImageViewerViewPage.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
+        mImageViewerViewPage.addOnPageChangeListener(object :
+            androidx.viewpager.widget.ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 
             }
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
 
             }
 
@@ -89,6 +99,10 @@ class DraggableImageGalleryViewer(context: Context) : FrameLayout(context) {
     private fun setCurrentImgIndex(index: Int) {
         mImageViewerViewPage.setCurrentItem(index, false)
         mImageViewerTvIndicator.text = "${index + 1}/${mImageList.size}"
+    }
+
+    fun setTitleString(title: String) {
+        findViewById<TextView>(R.id.title).text = title
     }
 
     private val vpContentViewList = ArrayList<DraggableImageView>()
@@ -117,7 +131,8 @@ class DraggableImageGalleryViewer(context: Context) : FrameLayout(context) {
     }
 
     fun closeWithAnimator(): Boolean {
-        val currentView = findViewWithTag<DraggableImageView>("$TAG_PREGIX${mImageViewerViewPage.currentItem}")
+        val currentView =
+            findViewWithTag<DraggableImageView>("$TAG_PREGIX${mImageViewerViewPage.currentItem}")
         val imageInfo = mImageList[mImageViewerViewPage.currentItem]
         if (imageInfo.draggableInfo.isValid()) {
             currentView?.closeWithAnimator()
